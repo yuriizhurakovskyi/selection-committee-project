@@ -3,69 +3,48 @@ package ua.lviv.yurii.zhurakovskyi.selectioncommittee.domain;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "statement")
 public class Statement {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	@Column
 	private Date date;
+	@Column
 	private Integer adminId;
-	private Integer facultyId;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "faculty_id")
+	private Faculty faculty;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "statement")
 	private List<ApplicationInfo> applicationInfos;
 
 	public Statement() {
 	}
 
-	public Statement(Date date, Integer adminId, Integer facultyId, List<ApplicationInfo> entrantStatement) {
+	public Statement(Date date, Integer adminId, Faculty faculty, List<ApplicationInfo> applicationInfos) {
 		this.date = date;
 		this.adminId = adminId;
-		this.facultyId = facultyId;
-		this.applicationInfos = entrantStatement;
+		this.faculty = faculty;
+		this.applicationInfos = applicationInfos;
 	}
 
-	public Statement(Integer id, Date date, Integer adminId, Integer facultyId,
-			List<ApplicationInfo> entrantStatement) {
+	public Statement(Integer id, Date date, Integer adminId, Faculty faculty, List<ApplicationInfo> applicationInfos) {
 		this.id = id;
 		this.date = date;
 		this.adminId = adminId;
-		this.facultyId = facultyId;
-		this.applicationInfos = entrantStatement;
-	}
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public Date getDate() {
-		return date;
-	}
-
-	public void setDate(Date date) {
-		this.date = date;
-	}
-
-	public Integer getAdminId() {
-		return adminId;
-	}
-
-	public Integer getFacultyId() {
-		return facultyId;
-	}
-
-	public void setFacultyId(Integer facultyId) {
-		this.facultyId = facultyId;
-	}
-
-	public void setAdminId(Integer adminId) {
-		this.adminId = adminId;
-	}
-
-	public List<ApplicationInfo> getApplicationInfos() {
-		return applicationInfos;
-	}
-
-	public void setApplicationInfos(List<ApplicationInfo> applicationInfos) {
+		this.faculty = faculty;
 		this.applicationInfos = applicationInfos;
 	}
 
@@ -74,9 +53,8 @@ public class Statement {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((adminId == null) ? 0 : adminId.hashCode());
-		result = prime * result + ((applicationInfos == null) ? 0 : applicationInfos.hashCode());
 		result = prime * result + ((date == null) ? 0 : date.hashCode());
-		result = prime * result + ((facultyId == null) ? 0 : facultyId.hashCode());
+		result = prime * result + ((faculty == null) ? 0 : faculty.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
@@ -95,20 +73,15 @@ public class Statement {
 				return false;
 		} else if (!adminId.equals(other.adminId))
 			return false;
-		if (applicationInfos == null) {
-			if (other.applicationInfos != null)
-				return false;
-		} else if (!applicationInfos.equals(other.applicationInfos))
-			return false;
 		if (date == null) {
 			if (other.date != null)
 				return false;
 		} else if (!date.equals(other.date))
 			return false;
-		if (facultyId == null) {
-			if (other.facultyId != null)
+		if (faculty == null) {
+			if (other.faculty != null)
 				return false;
-		} else if (!facultyId.equals(other.facultyId))
+		} else if (!faculty.equals(other.faculty))
 			return false;
 		if (id == null) {
 			if (other.id != null)
@@ -120,7 +93,7 @@ public class Statement {
 
 	@Override
 	public String toString() {
-		return "Statement [id=" + id + ", date=" + date + ", adminId=" + adminId + ", facultyId=" + facultyId
+		return "Statement [id=" + id + ", date=" + date + ", adminId=" + adminId + ", faculty=" + faculty
 				+ ", applicationInfos=" + applicationInfos + "]";
 	}
 

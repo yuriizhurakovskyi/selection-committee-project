@@ -1,5 +1,5 @@
 package ua.lviv.yurii.zhurakovskyi.selectioncommittee.domain;
 
 public enum Role {
-	ADMINISTRATOR, ENTRANT;
+	ROLE_ADMIN, ROLE_USER
 }

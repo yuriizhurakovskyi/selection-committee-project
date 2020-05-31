@@ -2,30 +2,57 @@ package ua.lviv.yurii.zhurakovskyi.selectioncommittee.domain;
 
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "application_info")
 public class ApplicationInfo {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private Integer applicantId;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "applicant_id")
+	private User applicant;
+	@ManyToMany
 	private List<Subject> subjects;
-	private Integer certificateId;
-	private Integer directionId;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "certificate_id")
+	private Certificate certificate;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "direction_id")
+	private Direction direction;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "statement_id")
+	private Statement statement;
 
 	public ApplicationInfo() {
 	}
 
-	public ApplicationInfo(Integer applicantId, List<Subject> subjects, Integer certificateId, Integer directionId) {
-		this.applicantId = applicantId;
+	public ApplicationInfo(User applicant, List<Subject> subjects, Certificate certificate, Direction direction,
+			Statement statement) {
+		this.applicant = applicant;
 		this.subjects = subjects;
-		this.certificateId = certificateId;
-		this.directionId = directionId;
+		this.certificate = certificate;
+		this.direction = direction;
+		this.statement = statement;
 	}
 
-	public ApplicationInfo(Integer id, Integer applicantId, List<Subject> subjects, Integer certificateId,
-			Integer directionId) {
+	public ApplicationInfo(Integer id, User applicant, List<Subject> subjects, Certificate certificate,
+			Direction direction, Statement statement) {
 		this.id = id;
-		this.applicantId = applicantId;
+		this.applicant = applicant;
 		this.subjects = subjects;
-		this.certificateId = certificateId;
-		this.directionId = directionId;
+		this.certificate = certificate;
+		this.direction = direction;
+		this.statement = statement;
 	}
 
 	public Integer getId() {
@@ -36,12 +63,12 @@ public class ApplicationInfo {
 		this.id = id;
 	}
 
-	public Integer getApplicantId() {
-		return applicantId;
+	public User getApplicant() {
+		return applicant;
 	}
 
-	public void setApplicantId(Integer applicantId) {
-		this.applicantId = applicantId;
+	public void setApplicant(User applicant) {
+		this.applicant = applicant;
 	}
 
 	public List<Subject> getSubjects() {
@@ -52,31 +79,39 @@ public class ApplicationInfo {
 		this.subjects = subjects;
 	}
 
-	public Integer getCertificateId() {
-		return certificateId;
+	public Certificate getCertificate() {
+		return certificate;
 	}
 
-	public void setCertificateId(Integer certificateId) {
-		this.certificateId = certificateId;
+	public void setCertificate(Certificate certificate) {
+		this.certificate = certificate;
 	}
 
-	public Integer getDirectionId() {
-		return directionId;
+	public Direction getDirection() {
+		return direction;
 	}
 
-	public void setDirectionId(Integer directionId) {
-		this.directionId = directionId;
+	public void setDirection(Direction direction) {
+		this.direction = direction;
+	}
+
+	public Statement getStatement() {
+		return statement;
+	}
+
+	public void setStatement(Statement statement) {
+		this.statement = statement;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((applicantId == null) ? 0 : applicantId.hashCode());
-		result = prime * result + ((certificateId == null) ? 0 : certificateId.hashCode());
-		result = prime * result + ((directionId == null) ? 0 : directionId.hashCode());
+		result = prime * result + ((applicant == null) ? 0 : applicant.hashCode());
+		result = prime * result + ((certificate == null) ? 0 : certificate.hashCode());
+		result = prime * result + ((direction == null) ? 0 : direction.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((subjects == null) ? 0 : subjects.hashCode());
+		result = prime * result + ((statement == null) ? 0 : statement.hashCode());
 		return result;
 	}
 
@@ -89,38 +124,38 @@ public class ApplicationInfo {
 		if (getClass() != obj.getClass())
 			return false;
 		ApplicationInfo other = (ApplicationInfo) obj;
-		if (applicantId == null) {
-			if (other.applicantId != null)
+		if (applicant == null) {
+			if (other.applicant != null)
 				return false;
-		} else if (!applicantId.equals(other.applicantId))
+		} else if (!applicant.equals(other.applicant))
 			return false;
-		if (certificateId == null) {
-			if (other.certificateId != null)
+		if (certificate == null) {
+			if (other.certificate != null)
 				return false;
-		} else if (!certificateId.equals(other.certificateId))
+		} else if (!certificate.equals(other.certificate))
 			return false;
-		if (directionId == null) {
-			if (other.directionId != null)
+		if (direction == null) {
+			if (other.direction != null)
 				return false;
-		} else if (!directionId.equals(other.directionId))
+		} else if (!direction.equals(other.direction))
 			return false;
 		if (id == null) {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
-		if (subjects == null) {
-			if (other.subjects != null)
+		if (statement == null) {
+			if (other.statement != null)
 				return false;
-		} else if (!subjects.equals(other.subjects))
+		} else if (!statement.equals(other.statement))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "ApplicationInfo [id=" + id + ", applicantId=" + applicantId + ", subjects=" + subjects
-				+ ", certificateId=" + certificateId + ", directionId=" + directionId + "]";
+		return "ApplicationInfo [id=" + id + ", applicant=" + applicant + ", certificate=" + certificate
+				+ ", direction=" + direction + ", statement=" + statement + "]";
 	}
 
 }
