@@ -1,20 +1,20 @@
 package ua.lviv.yurii.zhurakovskyi.selectioncommittee.security.service;
 
+import ua.lviv.yurii.zhurakovskyi.selectioncommittee.dao.UserRepository;
+import ua.lviv.yurii.zhurakovskyi.selectioncommittee.domain.User;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import ua.lviv.yurii.zhurakovskyi.selectioncommittee.dao.UserRepository;
-import ua.lviv.yurii.zhurakovskyi.selectioncommittee.domain.User;
-
 @Service
-public class CustomUserDetailsServiceImpl implements CustomUserDetailsService {
+public class UserServiceImpl implements UserService {
 
 	private final UserRepository userRepository;
 
 	@Autowired
-	public CustomUserDetailsServiceImpl(UserRepository userRepository) {
+	public UserServiceImpl(UserRepository userRepository) {
 		this.userRepository = userRepository;
 	}
 

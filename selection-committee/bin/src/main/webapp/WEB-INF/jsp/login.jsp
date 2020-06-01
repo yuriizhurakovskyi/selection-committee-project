@@ -2,7 +2,7 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,13 +11,14 @@
 </head>
 <body>
 
-	<form name="f" action="<c:url value='/login' />" method="POST">
+	<form name="f" action="<c:url value='/login' />"
+		method="POST">
 		<div>
 			<div>
 				<input type="text" name="username" placeholder="User Name">
 			</div>
 			<div>
-				<input type="password" name="password" placeholder="password">
+				<input type="password" name="password" placeholder="User Password">
 			</div>
 			<div>
 				<input type="submit" value="Sign In" name="j_submit">
@@ -32,10 +33,6 @@
 		</div>
 		<input type="hidden" name="${_csrf.parameterName }"
 			value="${_csrf.token }">
-		<h1>Don't have an account?</h1>
-		<div>
-			<a href="http://localhost:8080/register">Sign Up</a>
-		</div>
 	</form>
 
 </body>

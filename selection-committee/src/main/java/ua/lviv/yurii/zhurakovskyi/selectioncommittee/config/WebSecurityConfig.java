@@ -17,17 +17,17 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-import ua.lviv.yurii.zhurakovskyi.selectioncommittee.security.service.CustomUserDetailsServiceImpl;
+import ua.lviv.yurii.zhurakovskyi.selectioncommittee.security.service.UserServiceImpl;
 
 @Configuration
 @EnableWebSecurity
-@ComponentScan(basePackageClasses = CustomUserDetailsServiceImpl.class)
+@ComponentScan(basePackageClasses = UserServiceImpl.class)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	private final UserDetailsService userDetailsService;
 
 	@Autowired
-	public WebSecurityConfig(@Qualifier("customUserDetailsServiceImpl") UserDetailsService userDetailsService) {
+	public WebSecurityConfig(@Qualifier("userServiceImpl") UserDetailsService userDetailsService) {
 		this.userDetailsService = userDetailsService;
 	}
 
@@ -46,11 +46,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.csrf().disable().authorizeRequests().antMatchers("/", "/register").permitAll().anyRequest().authenticated()
+		http.csrf().disable().authorizeRequests().antMatchers("/", "/saveUser").permitAll().anyRequest().authenticated()
 				.antMatchers("/admin/**").hasRole("ADMIN").and().formLogin().loginPage("/login")
-				.successForwardUrl("/success").failureUrl("/login?error").permitAll().and().exceptionHandling()
+				.successForwardUrl("/successURL").failureUrl("/login?error").permitAll().and().exceptionHandling()
 				.accessDeniedPage("/403").and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 				.logoutSuccessUrl("/").permitAll();
+	}
+
+	private InMemoryUserDetailsManagerConfigurer<AuthenticationManagerBuilder> inMemoryConfigurer() {
+		return new InMemoryUserDetailsManagerConfigurer<AuthenticationManagerBuilder>();
 	}
 
 	@Autowired
@@ -58,10 +62,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		inMemoryConfigurer().withUser("admin").password("{noop}admin").authorities("ADMIN").and().configure(auth);
 		auth.authenticationProvider(provider);
 
-	}
-
-	private InMemoryUserDetailsManagerConfigurer<AuthenticationManagerBuilder> inMemoryConfigurer() {
-		return new InMemoryUserDetailsManagerConfigurer<AuthenticationManagerBuilder>();
 	}
 
 }

@@ -6,13 +6,13 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.3.0.RELEASE</version>
+		<version>2.0.6.RELEASE</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>ua.lviv.yurii.zhurakovskyi</groupId>
-	<artifactId>selection-committee</artifactId>
+	<groupId>com.example</groupId>
+	<artifactId>spring_security_demo</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>selection-committee</name>
+	<name>spring_security_demo</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
@@ -32,10 +32,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -51,6 +48,10 @@
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>
