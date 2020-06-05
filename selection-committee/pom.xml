@@ -12,7 +12,7 @@
 	<groupId>ua.lviv.yurii.zhurakovskyi.selectioncommittee</groupId>
 	<artifactId>selection-committee</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>spring_security_demo</name>
+	<name>selection-committee</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
