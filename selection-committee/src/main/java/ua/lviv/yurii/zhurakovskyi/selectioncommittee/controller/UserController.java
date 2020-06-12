@@ -1,27 +1,31 @@
 package ua.lviv.yurii.zhurakovskyi.selectioncommittee.controller;
 
-import ua.lviv.yurii.zhurakovskyi.selectioncommittee.domain.User;
-import ua.lviv.yurii.zhurakovskyi.selectioncommittee.security.service.UserServiceImpl;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+
+import ua.lviv.yurii.zhurakovskyi.selectioncommittee.domain.Faculty;
+import ua.lviv.yurii.zhurakovskyi.selectioncommittee.domain.User;
+import ua.lviv.yurii.zhurakovskyi.selectioncommittee.security.service.FacultyService;
+import ua.lviv.yurii.zhurakovskyi.selectioncommittee.security.service.impl.UserServiceImpl;
 
 @Controller
 public class UserController {
 
-	private final PasswordEncoder passwordEncoder;
-	private final UserServiceImpl userService;
-
 	@Autowired
-	public UserController(PasswordEncoder passwordEncoder, UserServiceImpl userService) {
-		this.passwordEncoder = passwordEncoder;
-		this.userService = userService;
-	}
+	private PasswordEncoder passwordEncoder;
+	@Autowired
+	private UserServiceImpl userService;
+	@Autowired
+	private FacultyService facultyService;
 
 	@PostMapping(value = "/saveUser")
 	public String loginCombination(@RequestParam("username") String username,
@@ -49,5 +53,24 @@ public class UserController {
 			model.addAttribute("userLogged", userLogged.getUsername());
 		}
 		return "home";
+	}
+
+	@RequestMapping(value = "/home", method = RequestMethod.GET)
+	public ModelAndView welcome(Model model) {
+		System.out.println("Hello from home!!");
+		ModelAndView modelAndView = new ModelAndView("home");
+		modelAndView.addObject("faculties", facultyService.getAllFaculties());
+		System.out.println(facultyService.getAllFaculties());
+		return modelAndView;
+	}
+
+	@RequestMapping(value = "/apply", method = RequestMethod.GET)
+	public String applyEntrant(Model model) {
+		return "home";
+	}
+
+	@RequestMapping(value = "/createFaculty", method = RequestMethod.GET)
+	public ModelAndView createFaculty() {
+		return new ModelAndView("createFaculty", "faculty", new Faculty());
 	}
 }

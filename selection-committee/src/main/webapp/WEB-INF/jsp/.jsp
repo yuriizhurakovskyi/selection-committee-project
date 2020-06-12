@@ -6,8 +6,6 @@
 <html lang="en">
 <head>
 <title>Welcome page</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link
 	href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900"
 	rel="stylesheet">
@@ -78,10 +76,10 @@
 
 					<div class="collapse navbar-collapse" id="navbarSupportedContent">
 						<ul class="nav navbar-nav ml-auto">
-							<li class="nav-item active"><a class="nav-link" href="home">Home</a>
+							<li class="nav-item active"><a class="nav-link" href="#">Home</a>
 							</li>
-							<li class="nav-item"><a class="nav-link"
-								href="createFaculty">Create Faculty</a></li>
+							<li class="nav-item"><a class="nav-link" href="#">Registration
+									of an entrant for one of the faculties</a></li>
 							<li class="nav-item"><a class="nav-link" href="#">Show
 									all faculties</a></li>
 							<li class="nav-item"><a class="nav-link" href="#">Show
@@ -91,28 +89,6 @@
 				</div>
 			</nav>
 			<h1>Hello: ${userLogged}</h1>
-			<c:if test="${not empty faculties}">
-				<div class="w3-container">
-					<h2>All Faculties</h2>
-					<c:forEach items="${faculties}" var="faculty">
-						<div class="w3-card-4" style="width: 70%">
-							<header class="w3-container w3-light-grey">
-								<h3>Faculty name: ${faculty.name}</h3>
-							</header>
-							<div class="w3-container">
-								<p>Number of free places${faculty.numberOfStudents}</p>
-								<hr>
-								<img src="${pageContext.request.contextPath}/images/faculty.png"
-									alt="Avatar" class="w3-left w3-circle w3-margin-right"
-									style="width: 60px">
-								<p>Number of free places${faculty.numberOfStudents}</p>
-								<br>
-							</div>
-							<button class="w3-button w3-block w3-dark-grey">Apply</button>
-						</div>
-					</c:forEach>
-				</div>
-			</c:if>
 			<h1>Log out:</h1>
 			<form action="<c:url value="/logout"/>" method="POST">
 				<input type="submit" value="Log out" name="">

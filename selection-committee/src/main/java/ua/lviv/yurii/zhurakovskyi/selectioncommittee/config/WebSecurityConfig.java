@@ -17,7 +17,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-import ua.lviv.yurii.zhurakovskyi.selectioncommittee.security.service.UserServiceImpl;
+import ua.lviv.yurii.zhurakovskyi.selectioncommittee.security.service.impl.UserServiceImpl;
 
 @Configuration
 @EnableWebSecurity

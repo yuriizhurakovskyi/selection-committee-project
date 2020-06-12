@@ -1,25 +1,19 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<!DOCTYPE html>
-<html>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<html lang="en">
 <head>
+<title>Welcome page</title>
+
 </head>
-<body >
-
-<h1>Create account</h1>
-<form action="<c:url value="/saveUser"/>" method="POST">
-
-    <input type="text" name="username" placeholder="username">
-    <input type="text" name="password" placeholder="password">
-
-    <input type="submit" value="Create Account" name="">
-</form>
-
-<h1>Or get to the logination page</h1>
-<div><a href="http://localhost:8080/login">Log in page</a></div>
+<body>
+	<h1>Hello: ${userLogged}</h1>
+	<h1>Log out:</h1>
+	<form action="<c:url value="/logout"/>" method="POST">
+		<input type="submit" value="Log out" name="">
+	</form>
 
 </body>
+
 </html>

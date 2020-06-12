@@ -1,7 +1,8 @@
-package ua.lviv.yurii.zhurakovskyi.selectioncommittee.security.service;
+package ua.lviv.yurii.zhurakovskyi.selectioncommittee.security.service.impl;
 
 import ua.lviv.yurii.zhurakovskyi.selectioncommittee.dao.UserRepository;
 import ua.lviv.yurii.zhurakovskyi.selectioncommittee.domain.User;
+import ua.lviv.yurii.zhurakovskyi.selectioncommittee.security.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

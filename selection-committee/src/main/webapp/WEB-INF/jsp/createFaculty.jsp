@@ -1,9 +1,8 @@
-<!DOCTYPE html>
+<!DOCTYPE html  lang="en">
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ page isELIgnored="false"%>
-<html lang="en">
 <head>
 <title>Welcome page</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -91,47 +90,27 @@
 				</div>
 			</nav>
 			<h1>Hello: ${userLogged}</h1>
-			<c:if test="${not empty faculties}">
-				<div class="w3-container">
-					<h2>All Faculties</h2>
-					<c:forEach items="${faculties}" var="faculty">
-						<div class="w3-card-4" style="width: 70%">
-							<header class="w3-container w3-light-grey">
-								<h3>Faculty name: ${faculty.name}</h3>
-							</header>
-							<div class="w3-container">
-								<p>Number of free places${faculty.numberOfStudents}</p>
-								<hr>
-								<img src="${pageContext.request.contextPath}/images/faculty.png"
-									alt="Avatar" class="w3-left w3-circle w3-margin-right"
-									style="width: 60px">
-								<p>Number of free places${faculty.numberOfStudents}</p>
-								<br>
-							</div>
-							<button class="w3-button w3-block w3-dark-grey">Apply</button>
-						</div>
-					</c:forEach>
+			<h1>Create new Faculty</h1>
+			<form:form mathod="POST" action="${contextPath}/createFaculty"
+				modelAttribute="faculty">
+				<div class="form-group">
+					<form:label for="name" path="name">Name of Faculty</form:label>
+					<form:input type="text" path="name" class="form-control" id="name"
+						placeholder="Name of Faculty" />
 				</div>
-			</c:if>
+				<div class="form-group">
+					<form:label for="exampleFormControlInput1" path="numberOfStudents">Number of students</form:label>
+					<form:input type="number" min="20" max="200" class="form-control"
+						id="exampleFormControlInput1" path="numberOfStudents"
+						placeholder="" />
+				</div>
+				<button type="submit" class="btn btn-primary">Submit</button>
+			</form:form>
 			<h1>Log out:</h1>
 			<form action="<c:url value="/logout"/>" method="POST">
 				<input type="submit" value="Log out" name="">
 			</form>
-			<h2 class="mb-4">Sidebar #01</h2>
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
-				do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-				enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
-				ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-				reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-				pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-				culpa qui officia deserunt mollit anim id est laborum.</p>
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
-				do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-				enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
-				ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-				reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-				pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-				culpa qui officia deserunt mollit anim id est laborum.</p>
+
 		</div>
 	</div>
 
